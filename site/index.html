@@ -131,6 +131,55 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
+    <script>
+
+        $(document).ready(function () {
+
+            let items = [
+                {
+                    "id": 1,
+                    "name": "W Series Plunger Pump",
+                    "price": 3290,
+                    "quantity": 100
+                },
+                {
+                    "id": 2,
+                    "name": "Quickflange",
+                    "price": 12500,
+                    "quantity": 3
+                },
+                {
+                    "id": 3,
+                    "name": "Solar Chemical Injection Pump",
+                    "price": 5000,
+                    "quantity": 5
+                }
+            ]
+
+            let itemCard = $("#item-card")
+            arr = jQuery.map(items, function (item) {
+                return `
+                <div class="col">
+                  <div class="card" style="width: 18rem;">
+                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">${item.name}</h5>
+                      <p class="card-text">£ ${item.price}</p>
+                      <p class="card-text">Quantity <span class="badge bg-primary">${item.quantity}</span></p>
+                      <a href="#" class="btn btn-outline-danger">Delete</a>
+                    </div>
+                  </div>
+                </div>
+                `
+            });
+
+            $("#item-card").html(arr);
+
+
+        });
+
+    </script>
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
