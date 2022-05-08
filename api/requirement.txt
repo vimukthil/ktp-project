@@ -1,0 +1,4 @@
+
+# Core
+Flask==2.1.2
+flask-restx==0.5.1
