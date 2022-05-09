@@ -41,6 +41,16 @@ class Item(object):
         self.items.append(item)
         return item
 
+    def get(self, id):
+        for item in self.items:
+            if item["id"] == id:
+                return item
+        api.abort(404, f"Item {id} doesn't exist")
+
+    def delete(self, id):
+        item = self.get(id)
+        self.items.remove(item)
+
     def preload(self):
         """Load object from file."""
         gist_raw_url = "https://gist.githubusercontent.com/chamathpali/7cccd0ff8a0338645559e5ed468231fa/raw/3a467ff8807a090cbdbe5e4583b8d07b925a7979/items.json"
@@ -49,8 +59,6 @@ class Item(object):
 
         for res in json_response:
             self.create(res)
-
-        return {"status": True, "message": "successful."}
 
 
 item_obj = Item()
@@ -74,6 +82,20 @@ class ItemList(Resource):
         return item_obj.create(api.payload), 201
 
 
+@ns.route("/<int:id>")
+@ns.response(404, "Item not found")
+@ns.param("id", "The item identifier")
+class ItemInfo(Resource):
+    """Delete single item"""
+
+    @ns.doc("delete_item")
+    @ns.response(204, "Item deleted")
+    def delete(self, id):
+        """Delete a item given its identifier"""
+        item_obj.delete(id)
+        return "", 204
+
+
 @ns.route("/preload")
 class ItemAction(Resource):
     """Load list of items."""
@@ -81,6 +103,7 @@ class ItemAction(Resource):
     @ns.doc("load_items")
     def get(self):
         item_obj.preload()
+        return "Success", 200
 
 
 if __name__ == "__main__":
