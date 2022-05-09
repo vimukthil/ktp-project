@@ -66,6 +66,13 @@ class ItemList(Resource):
         """List all tasks"""
         return item_obj.items
 
+    @ns.doc("create_item")
+    @ns.expect(item)
+    @ns.marshal_with(item, code=201)
+    def post(self):
+        """Create a new item"""
+        return item_obj.create(api.payload), 201
+
 
 @ns.route("/preload")
 class ItemAction(Resource):
