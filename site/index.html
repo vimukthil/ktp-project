@@ -63,66 +63,49 @@
     <div class="p-3 mb-2" style="background: #e57200; text-align: center;">
         <a href="#" class="btn btn-light"><i class="fa fa-check"></i>Preload</a>
         <a href="#" class="btn btn-light"><i class="fa fa-check"></i>Refresh</a>
-        <a href="#" class="btn btn-light"><i class="fa fa-check"></i>Add Product</a>
+        <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#addItemModal" style="margin-left: 48px">
+            Add Product
+        </button>
+        <!-- Modal -->
+        <div class="modal fade" id="addItemModal" tabindex="-1" aria-labelledby="addItemModalLabel" aria-hidden="true" placeholder="Price in £">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addItemModalLabel">Add a new item</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3" style= "text-align: left;">
+                            <div class="col-12">
+                                <label for="itemName" class="form-label">Item Name</label>
+                                <input type="text" class="form-control" id="itemName" placeholder="ABC Product">
+                              </div>
+                            <div class="col-md-6">
+                              <label for="itemPrice" class="form-label" maxlength="100">Item Price (£)</label>
+                              <input type="number" class="form-control" id="itemPrice" placeholder="Price" min="0" max="1000000">
+                            </div>
+                            <div class="col-md-6">
+                              <label for="itemQuentity" class="form-label">Quentity</label>
+                              <input type="number" class="form-control" id="itemPrice" placeholder="Quantity" min="0" max="1000000">
+                            </div>
+                            <div class="col-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-warning">Save Item</button>
+                            </div>
+                          </form>
+                    </div>
+                    <!--<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-warning">Save item</button>
+                    </div>-->
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container" style="height: 48px;"></div>
     <div class="container">
         <div class="row" id="item-card">
-            <div class="col">
-                <div class="card" style="width: 18rem; margin-top: 2rem;">
-                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sample Product</h5>
-                        <p class="card-text">£ 100.0</p>
-                        <p class="card-text">Quantity <span class="badge bg-primary">00</span></p>
-                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem; margin-top: 2rem;">
-                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sample Product</h5>
-                        <p class="card-text">£ 100.0</p>
-                        <p class="card-text">Quantity <span class="badge bg-primary">00</span></p>
-                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem; margin-top: 2rem;">
-                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sample Product</h5>
-                        <p class="card-text">£ 100.0</p>
-                        <p class="card-text">Quantity <span class="badge bg-primary">00</span></p>
-                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem; margin-top: 2rem;">
-                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sample Product</h5>
-                        <p class="card-text">£ 100.0</p>
-                        <p class="card-text">Quantity <span class="badge bg-primary">00</span></p>
-                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card" style="width: 18rem; margin-top: 2rem;">
-                    <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Sample Product</h5>
-                        <p class="card-text">£ 100.0</p>
-                        <p class="card-text">Quantity <span class="badge bg-primary">00</span></p>
-                        <a href="#" class="btn btn-outline-danger">Delete</a>
-                    </div>
-                </div>
-            </div>
+            <!-- items goes here -->
         </div>
 
     </div>
@@ -135,26 +118,21 @@
 
         $(document).ready(function () {
 
-            let items = [
-                {
-                    "id": 1,
-                    "name": "W Series Plunger Pump",
-                    "price": 3290,
-                    "quantity": 100
-                },
-                {
-                    "id": 2,
-                    "name": "Quickflange",
-                    "price": 12500,
-                    "quantity": 3
-                },
-                {
-                    "id": 3,
-                    "name": "Solar Chemical Injection Pump",
-                    "price": 5000,
-                    "quantity": 5
+            const BASE_ENDPOINT = "http://localhost:8000"
+
+            let items = []
+
+            $.ajax({
+                url: BASE_ENDPOINT + "/items",
+                contentType: "application/json",
+                dataType: 'json',
+                crossDomain: true,
+                success: function (result) {
+                    console.log('api callled')
+                    console.log(result)
+                    items = result
                 }
-            ]
+            })
 
             let itemCard = $("#item-card")
             arr = jQuery.map(items, function (item) {
