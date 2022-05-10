@@ -75,3 +75,20 @@ def get_item_by_id(item_id):
         item = {}
 
     return item
+
+def delete_user(item_id):
+    response = {}
+    try:
+        conn = connect_to_db()
+        conn.execute("DELETE from items WHERE id = ?", (item_id,))
+        conn.commit()
+        response["status"] = True
+        response["message"] = "Item deleted successfully"
+    except:
+        conn.rollback()
+        response["status"] = False
+        response["message"] = "Cannot delete item"
+    finally:
+        conn.close()
+
+    return response

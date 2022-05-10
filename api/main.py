@@ -18,5 +18,9 @@ def api_get_items():
 def api_preload_db():
     return service.preload()
 
+@app.route('/items/delete/<item_id>',  methods = ['DELETE'])
+def api_delete_user(item_id):
+    return jsonify(service.delete_user(item_id))
+
 if __name__ == "__main__":
     app.run(debug=True)
