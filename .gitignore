@@ -1,6 +1,8 @@
 # remove sqlite databases
 **/*.db
 
-
 # remove mac directory info files
 **/*.DS_Store
+
+# remove python compiled files
+**/*.pyc
