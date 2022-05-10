@@ -1,6 +1,8 @@
 
 # Core
 Flask==2.1.2
-flask-restx==0.5.1
+Flask-Cors==3.0.10
+
+db-sqlite3==0.0.1
 
 certifi==2021.10.8
