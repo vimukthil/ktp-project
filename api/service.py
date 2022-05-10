@@ -63,7 +63,7 @@ def get_item_by_id(item_id):
         conn = connect_to_db()
         conn.row_factory = sqlite3.Row
         cur = conn.cursor()
-        cur.execute("SELECT * FROM items WHERE user_id = ?", (item_id,))
+        cur.execute("SELECT * FROM items WHERE id = ?", (item_id,))
         row = cur.fetchone()
 
         # convert row object to dictionary
@@ -76,7 +76,7 @@ def get_item_by_id(item_id):
 
     return item
 
-def delete_user(item_id):
+def delete_item(item_id):
     response = {}
     try:
         conn = connect_to_db()

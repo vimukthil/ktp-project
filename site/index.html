@@ -77,7 +77,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3" style="text-align: left;">
+                        <form id="createForm" class="row g-3" style="text-align: left;">
                             <div class="col-12">
                                 <label for="itemName" class="form-label">Item Name</label>
                                 <input type="text" class="form-control" id="itemName" placeholder="ABC Product">
@@ -88,8 +88,8 @@
                                     max="1000000">
                             </div>
                             <div class="col-md-6">
-                                <label for="itemQuentity" class="form-label">Quentity</label>
-                                <input type="number" class="form-control" id="itemPrice" placeholder="Quantity" min="0"
+                                <label for="itemQuantity" class="form-label">Quantity</label>
+                                <input type="number" class="form-control" id="itemQuantity" placeholder="Quantity" min="0"
                                     max="1000000">
                             </div>
                             <div class="col-12">
@@ -151,8 +151,8 @@
 
         $(document).ready(function () {
 
+            // get all items
             let items = []
-
             $.ajax({
                 url: BASE_ENDPOINT + "/items",
                 contentType: "application/json",
@@ -177,6 +177,33 @@
                     $("#item-card").html(arr);
                 }
             })
+
+            // add item
+            $("#createForm").submit(function (event) {
+                let formData = {
+                    name: $("#itemName").val(),
+                    price: $("#itemPrice").val(),
+                    quantity: $("#itemQuantity").val()
+                }
+
+                $.ajax({
+                    url: BASE_ENDPOINT + "/items",
+                    type: "POST",
+                    data: JSON.stringify(formData),
+                    contentType: "application/json",
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.id) {
+                            alert("Item saved successfully.")
+                        } else {
+                            alert("Item not saved")
+                        }
+                    }
+                })
+
+                event.preventDefault();
+            });
+
 
         }); // $(document)
 
