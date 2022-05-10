@@ -14,13 +14,18 @@ create_db_table()
 def api_get_items():
     return jsonify(service.get_items())
 
+@app.route('/items',  methods = ['POST'])
+def api_add_item():
+    item = request.get_json()
+    return jsonify(service.insert_item(item))
+
 @app.route('/items/preload', methods=['GET'])
 def api_preload_db():
     return service.preload()
 
 @app.route('/items/delete/<item_id>',  methods = ['DELETE'])
-def api_delete_user(item_id):
-    return jsonify(service.delete_user(item_id))
+def api_delete_item(item_id):
+    return jsonify(service.delete_item(item_id))
 
 if __name__ == "__main__":
     app.run(debug=True)
