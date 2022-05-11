@@ -80,21 +80,21 @@
                         <form id="createForm" class="row g-3" style="text-align: left;">
                             <div class="col-12">
                                 <label for="itemName" class="form-label">Item Name</label>
-                                <input type="text" class="form-control" id="itemName" placeholder="ABC Product">
+                                <input type="text" class="form-control" id="itemName" placeholder="ABC Product" required="true">
                             </div>
                             <div class="col-md-6">
                                 <label for="itemPrice" class="form-label" maxlength="100">Item Price (£)</label>
                                 <input type="number" class="form-control" id="itemPrice" placeholder="Price" min="0"
-                                    max="1000000">
+                                    max="1000000" required="true">
                             </div>
                             <div class="col-md-6">
                                 <label for="itemQuantity" class="form-label">Quantity</label>
                                 <input type="number" class="form-control" id="itemQuantity" placeholder="Quantity" min="0"
-                                    max="1000000">
+                                    max="1000000" required="true">
                             </div>
                             <div class="col-12">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-warning">Save Item</button>
+                                <button type="submit" class="btn btn-warning">Add Item</button>
                             </div>
                         </form>
                     </div>
@@ -107,7 +107,7 @@
         </div>
     </div>
     <div class="container" style="height: 48px;"></div>
-    <div class="container">
+    <div class="container" style="max-width: 75%;">
         <div class="row" id="item-card">
             <!-- items goes here -->
         </div>
@@ -123,7 +123,7 @@
 
         function deleteItem(itemId) {
             $.ajax({
-                url: BASE_ENDPOINT + "/items/delete/" + itemId,
+                url: BASE_ENDPOINT + "/items/" + itemId,
                 type: 'DELETE',
                 contentType: "application/json",
                 dataType: "json",
@@ -140,7 +140,7 @@
                 contentType: "application/json",
                 dataType: "json",
                 success: function (result) {
-                    alert(result.message)
+                    alert("Preload Successful, Please press Refresh button to load products")
                 }
             })
         }
@@ -162,10 +162,10 @@
                     arr = jQuery.map(result, function (item) {
                         return `
                         <div class="col">
-                        <div class="card" style="width: 18rem;">
-                            <img src="https://i.ytimg.com/vi/nq10eJSrTVU/maxresdefault.jpg" class="card-img-top" alt="...">
+                        <div class="card" style="width: 18rem; margin-bottom: 2rem">
+                            <img src="placeholder_icr.png" class="card-img-top" alt="...">
                             <div class="card-body">
-                            <h5 class="card-title">${item.name}</h5>
+                            <h5 class="card-title text-truncate">${item.name}</h5>
                             <p class="card-text">£ ${item.price}</p>
                             <p class="card-text">Quantity <span class="badge bg-primary">${item.quantity}</span></p>
                             <a onclick="deleteItem(${item.id})" class="btn btn-outline-danger">Delete</a>
@@ -194,7 +194,8 @@
                     dataType: "json",
                     success: function (result) {
                         if (result.id) {
-                            alert("Item saved successfully.")
+                            alert("Item added successfully.")
+                            refresh()
                         } else {
                             alert("Item not saved")
                         }

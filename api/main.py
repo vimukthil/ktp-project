@@ -23,7 +23,7 @@ def api_add_item():
 def api_preload_db():
     return service.preload()
 
-@app.route('/items/delete/<item_id>',  methods = ['DELETE'])
+@app.route('/items/<item_id>',  methods = ['DELETE'])
 def api_delete_item(item_id):
     return jsonify(service.delete_item(item_id))
 

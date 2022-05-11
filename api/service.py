@@ -1,4 +1,5 @@
 
+from urllib.error import HTTPError
 from urllib.request import urlopen
 import certifi
 import json
@@ -31,13 +32,19 @@ def get_items():
 def preload():
     """Load object from file."""
     gist_raw_url = "https://gist.githubusercontent.com/chamathpali/7cccd0ff8a0338645559e5ed468231fa/raw/3a467ff8807a090cbdbe5e4583b8d07b925a7979/items.json"
-    response = urlopen(gist_raw_url, cafile=certifi.where())
+    try:
+        response = urlopen(gist_raw_url, cafile=certifi.where())
+    except:
+        return {
+            "status": False,
+            "message": "preload unsuccessful"
+        }
     json_response = json.load(response)
 
     for res in json_response:
         insert_item(res)
 
-    return {"status": True, "message": "successful."}
+    return {"status": True, "message": "preload successful"}
 
 
 def insert_item(item):
